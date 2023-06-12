@@ -14,7 +14,7 @@
 
 <br/>
 
-## :zap Skills
+## Skills
 
 - Programming languages: Python
 - Web frameworks: Django
