@@ -52,3 +52,5 @@ jobs:
           git diff --stat
           git commit -m "Auto commit: Update snake animation" --allow-empty
           git push origin main
+        env:
+            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
