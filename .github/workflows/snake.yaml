@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
 
       - name: Configure Git user email
         run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
