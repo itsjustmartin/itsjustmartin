@@ -35,6 +35,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add -A
-          git commit -m "Update snake.svg"
+          set -x  # Enable debugging
+          git add dist/snake.svg
+          git commit -m "Update snake animation"
           git push origin main
+
