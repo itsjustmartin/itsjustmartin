@@ -47,8 +47,8 @@ jobs:
       - name: Commit and push changes
         run: |
           set -x  # Enable debugging
-          git add dist/snake.svg
+          git add -A
           git status
           git diff --stat
-          git commit -m "Update snake animation"
+          git commit -m "Auto commit: Update snake animation" --allow-empty
           git push origin main
