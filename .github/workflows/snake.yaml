@@ -25,13 +25,10 @@ jobs:
         uses: Platane/snk/svg-only@v2
         with:
           github_user_name: ${{ github.repository_owner }}
-          svg_out_path: dist/snake.svg
+          output_dir: dist
 
       - name: List contents of dist directory
         run: ls dist
-
-      - name: Check git status
-        run: git status
 
       - name: Commit and push changes
         run: |
@@ -39,4 +36,3 @@ jobs:
           git add dist/snake.svg
           git commit -m "Update snake animation"
           git push origin main
-
