@@ -29,4 +29,3 @@ jobs:
           build_dir: dist
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          
