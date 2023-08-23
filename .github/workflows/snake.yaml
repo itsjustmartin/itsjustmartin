@@ -1,56 +1,31 @@
-name: Generate and Push Snake Animation
+name: Generate snake animation
 
 on:
-  schedule:
-    - cron: "0 */12 * * *"
+  schedule: # execute every 12 hours
+    - cron: "* */12 * * *"
+
   workflow_dispatch:
+
   push:
     branches:
-      - main
+    - master
 
 jobs:
-  generate_and_push:
+  generate:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Configure Git user
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-      - name: Generate snake.svg
-        id: generate_svg
+      - name: generate snake.svg
         uses: Platane/snk/svg-only@v2
         with:
           github_user_name: ${{ github.repository_owner }}
-          output: dist/snake.svg
+          outputs: dist/snake.svg
 
-      - name: Verify generated file
-        run: |
-          ls dist
-          cat dist/snake.svg
 
-      - name: Check Git status
-        run: git status
-
-      - name: Check Git diff
-        run: git diff --stat
-
-      - name: Commit and push changes
-        run: |
-          set -x  # Enable debugging
-          git add -A
-          git status
-          git diff --stat
-          git commit -m "Auto commit: Update snake animation" --allow-empty
-          git push origin main
+      - name: push snake.svg to the output branch
+        uses: crazy-max/ghaction-github-pages@v2.6.0
+        with:
+          target_branch: output
+          build_dir: dist
         env:
-            ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
