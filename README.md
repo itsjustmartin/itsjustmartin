@@ -6,8 +6,8 @@
 
 ## About Me
 
-- 👋 Hello world `<img src="Media/earth.gif" width="30px">` , My name is Martin Yacoub.
-- 💻 I’m back-end Developer . great experience in Python and Django.`<img src="Media/developer.gif" width="45px">`
+- 👋 Hello world <img src="Media/earth.gif" width="30px"> , My name is Martin Yacoub.
+- 💻 I’m back-end Developer . great experience in Python and Django.<img src="Media/developer.gif" width="45px">
 - 👀 I am always looking to learn new technologies and keep up with industry trends.
 
 <br/>
