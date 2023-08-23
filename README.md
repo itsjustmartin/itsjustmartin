@@ -72,8 +72,9 @@
 
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" />
+<img src="https://raw.githubusercontent.com/itsjustmartin/itsjustmartin/output/snake.svg" alt="Snake animation" />
 
+###
 ###
 <summary>
     <p align="center" > My Github Stats ▼</p>
