@@ -1,0 +1,48 @@
+name: Generate snake animation
+
+on:
+  schedule: # execute every 12 hours
+    - cron: "0 */12 * * *"
+
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate snake.svg
+        uses: Platane/snk@v0.3.0
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          svg_out_path: dist/snake.svg
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -am "Update snake.svg"
+          git push
+
+      - name: Push snake.svg to the output branch
+        uses: actions/checkout@v2
+        with:
+          ref: 'output'
+          repository: ${{ github.repository }}
+
+      - name: Copy SVG to output branch
+        run: |
+          mkdir -p ./.github/workflows/dist
+          cp ./dist/snake.svg ./.github/workflows/dist/snake.svg
+          cd ./.github/workflows
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update snake.svg"
+          git push
