@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -22,17 +27,28 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
       - name: Generate snake.svg
+        id: generate_svg
         uses: Platane/snk/svg-only@v2
         with:
           github_user_name: ${{ github.repository_owner }}
-          output_dir: dist
+          output: dist/snake.svg
 
-      - name: List contents of dist directory
-        run: ls dist
+      - name: Verify generated file
+        run: |
+          ls dist
+          cat dist/snake.svg
+
+      - name: Check Git status
+        run: git status
+
+      - name: Check Git diff
+        run: git diff --stat
 
       - name: Commit and push changes
         run: |
           set -x  # Enable debugging
           git add dist/snake.svg
+          git status
+          git diff --stat
           git commit -m "Update snake animation"
           git push origin main
