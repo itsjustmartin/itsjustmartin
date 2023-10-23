@@ -1,8 +1,8 @@
 name: Generate snake animation
 
 on:
-  schedule: # execute every 12 hours
-    - cron: "* */12 * * *"
+  schedule:
+    - cron: "0 */12 * * *"
 
   workflow_dispatch:
 
@@ -15,12 +15,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: generate snake.svg
-        uses: Platane/snk/svg-only@v2
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: dist/snake.svg
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: generate snake.svg
+        run: npm run generate-svg
+        env:
+          GITHUB_USER_NAME: ${{ github.repository_owner }}
 
       - name: push snake.svg to the output branch
         uses: crazy-max/ghaction-github-pages@v2.6.0
